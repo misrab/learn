@@ -11,7 +11,8 @@ package database
 
 
 import (
-	"gopkg.in/mgo.v2"
+	"database/sql"
+	_ "github.com/lib/pq"
 )
 
 /*
@@ -19,7 +20,7 @@ import (
 */
 
 type Database interface {
-
+	Close()
 }
 
 
@@ -29,13 +30,24 @@ type Database interface {
 
 // this determines what implementation we're 
 // using
-func DatabaseConnect() {
+func DatabaseConnect(url string) (Database, error){
+	db, err := sql.Open("postgres", url)
+	if err != nil { return nil, err }
 
-	return nil, nil
+	session := new(Session)
+	session.db = db
+	return session, nil
 }
 
+// alias to extend implementation
+type Session struct {
+	db *sql.DB
+}
 
 /*
 	Initial implementation
 */
 
+func (s *Session) Close() {
+	s.db.Close()
+}
