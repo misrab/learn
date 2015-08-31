@@ -61,8 +61,6 @@ func DatabaseConnect(url string, models...interface{}) (Database, error){
 		
 
 
-
-
 	// return
 	session := new(Session)
 	session.db = &db

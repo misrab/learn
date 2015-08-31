@@ -48,11 +48,12 @@ func SetInterval(interval time.Duration, quit chan struct{}, f func()) {
 }
 
 
+/*
+	This is the task we'll run intermittently.
+	It goes through each source and updates the 
+	appropriate database collection, by id, including new inserts.
+*/
 
-// generic unmarshal
-// func Unmarshal(b []byte, wrapper interface{}) {
-// 	return json.Unmarshal(b, wrapper)
-// 	if err != nil { return err }
-
-// 	re
-// }
+func Update() {
+	updateCoursera()
+}

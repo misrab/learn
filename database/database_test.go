@@ -6,9 +6,10 @@ import (
 
 	// "fmt"
 	"os"
+	"errors"
 )
 
-func TestDatabaseConnect(t *testing.T) {
+func TestDatabaseBasic(t *testing.T) {
 	url := os.Getenv("POSTGRESQL_LOCAL_URL")
 
 	type Model struct {
@@ -23,13 +24,20 @@ func TestDatabaseConnect(t *testing.T) {
 
 
 	// test insert
-	// model := Model{Name:"foo", Value:64}
-	// session.Insert(&model)
+	model := Model{Name:"foo", Value:64}
+	session.Insert(&model)
 
-	// records := []Model{}
-	// session.FindAll(&records)
-	// // fmt.Print(len(records))
-	// for _, v := range records {
-	// 	fmt.Printf("%+v", v)
-	// }
+
+	// try and get it back
+	records := []Model{}
+	session.FindAll(&records)
+
+	if len(records) != 1 {
+		t.Error(errors.New("Couldn't retrieve the record we just inserted"))
+	}
+
+	record := records[0]
+	if record.Name != model.Name || record.Value != model.Value {
+		t.Error(errors.New("Record retrieved didn't have the right values"))
+	}
 }

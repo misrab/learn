@@ -8,7 +8,7 @@
 package fetcher
 
 import (
-	// "fmt"
+	"fmt"
 
 	"encoding/json"
 )
@@ -41,7 +41,7 @@ type courseraCourse struct {
 
 	Links struct {
 		Categories []int
-	}
+	} `sql:"-"` // gorm to ignore the field
 
 	// my own
 	CategoriesString []string
@@ -97,4 +97,28 @@ func courseraFillCategories(courses []courseraCourse, categories []courseraCateg
 		// set it
 		courses[courseIndex].CategoriesString = categoriesString
 	}
+}
+
+
+
+func updateCoursera() error {
+	println("updating coursera")
+
+	// get courses
+	courses, err := courseraGetCourses()
+	if err != nil { return err }
+
+	// get categories
+	categories, err := courseraGetCategories()
+	if err != nil { return err }
+
+	// fill up categories in string form for each course
+	courseraFillCategories(courses, categories)
+
+
+	for _, c := range courses {
+		fmt.Printf("%+v\n", c)
+	}
+
+	return nil
 }

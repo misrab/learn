@@ -34,14 +34,6 @@ func TestCoursera(t *testing.T) {
 }
 
 
-// func TestMoo(t *testing.T) {
-// 	q := make(chan struct{})
-// 	SetInterval(time.Second, q, func() {
-// 		println("moo")
-// 	})
-// }
-
-
 func TestUdacity(t *testing.T) {
 	// get courses
 	_, err := udacityGetCourses()
@@ -53,4 +45,10 @@ func TestUdacity(t *testing.T) {
 	// 	fmt.Printf("%+v\n", c)
 	// }
 
+}
+
+
+
+func TestUpdate(t *testing.T) {
+	Update()
 }
