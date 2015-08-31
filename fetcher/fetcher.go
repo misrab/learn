@@ -5,7 +5,7 @@
 */
 
 
-package api
+package fetcher
 
 
 import (

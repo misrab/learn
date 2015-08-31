@@ -10,7 +10,6 @@ import (
 func TestDatabaseConnect(t *testing.T) {
 	url := os.Getenv("POSTGRESQL_LOCAL_URL")
 	session, err := DatabaseConnect(url)
-	defer session.Close()
-
 	if err != nil { t.Error(err) }
+	defer session.Close()
 }

@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/misrab/learn/api"
+	"github.com/misrab/learn/fetcher"
 )
 
 

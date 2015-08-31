@@ -5,7 +5,7 @@
 	https://www.coursera.org/course/[shortname]
 */
 
-package api 
+package fetcher
 
 import (
 	// "fmt"

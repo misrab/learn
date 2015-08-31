@@ -2,7 +2,7 @@
 	test getting data from different sources
 */
 
-package api
+package fetcher
 
 import (
 	"testing"
